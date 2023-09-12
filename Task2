@@ -1,26 +1,26 @@
 import java.util.Scanner;
 import java.util.Locale;
 public class TaskTwo {
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
+        scanner.useLocale(Locale.ROOT);
 
-        double a = readSide("Введите длину первого катета: ");
+        double a = readDouble("Введите длину первого катета: ");
 
-        double b = readSide("Введите длину второго катета: ");
+        double b = readDouble("Введите длину второго катета: ");
 
-        double c = readHypotenuse("Введите длину гипотенузы: ");
+        double c = readDouble("Введите длину гипотенузы: ");
 
         if (isRightTriangle(a, b, c)){
-            System.out.println("Этот треугольник прямоугольный");
-
         }else{
             System.out.println("Этот треугольник не прямоугольный");
             System.exit(1);
         }
 
         if (isTriangleExists(a, b, c)) {
-            double r = readRadius("Введите радиус круга: ");
+            double r = readDouble("Введите радиус круга: ");
             if (canFitCircle(a, b, c, r)){
                 System.out.println("Можно вписать круг с радиусом " + r);
             } else {
@@ -33,20 +33,8 @@ public class TaskTwo {
         }
     }
 
-    public static double readSide(String message) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(message);
-        return scanner.nextDouble();
-    }
+    public static double readDouble(String message) {
 
-    public static double readRadius(String message) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(message);
-        return scanner.nextDouble();
-    }
-
-    public static double readHypotenuse(String message) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print(message);
         return scanner.nextDouble();
     }
@@ -64,4 +52,6 @@ public class TaskTwo {
     public static boolean isRightTriangle(double a, double b, double c){
         return c * c == a * a + b * b;
     }
+
 }
+
