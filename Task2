@@ -1,0 +1,67 @@
+import java.util.Scanner;
+import java.util.Locale;
+public class TaskTwo {
+
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.ROOT);
+
+        double a = readSide("Введите длину первого катета: ");
+
+        double b = readSide("Введите длину второго катета: ");
+
+        double c = readHypotenuse("Введите длину гипотенузы: ");
+
+        if (isRightTriangle(a, b, c)){
+            System.out.println("Этот треугольник прямоугольный");
+
+        }else{
+            System.out.println("Этот треугольник не прямоугольный");
+            System.exit(1);
+        }
+
+        if (isTriangleExists(a, b, c)) {
+            double r = readRadius("Введите радиус круга: ");
+            if (canFitCircle(a, b, c, r)){
+                System.out.println("Можно вписать круг с радиусом " + r);
+            } else {
+                System.out.println("Нельзя вписать круг с радиусом " + r);
+            }
+
+
+        } else {
+            System.out.println("Треугольника с такими сторонами не существует");
+        }
+    }
+
+    public static double readSide(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(message);
+        return scanner.nextDouble();
+    }
+
+    public static double readRadius(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(message);
+        return scanner.nextDouble();
+    }
+
+    public static double readHypotenuse(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(message);
+        return scanner.nextDouble();
+    }
+
+    public static boolean isTriangleExists(double a, double b, double c) {
+        return a + b > c && a + c > b && b + c > a;
+    }
+
+    public static boolean canFitCircle(double a, double b, double c, double r) {
+        double maxRInscribedCircle = (a + b - c) / 2;
+        double area = Math.PI * r * r;
+        return Math.PI * maxRInscribedCircle * maxRInscribedCircle >= area;
+    }
+
+    public static boolean isRightTriangle(double a, double b, double c){
+        return c * c == a * a + b * b;
+    }
+}
